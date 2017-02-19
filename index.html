@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="pizza_storage_app">
+  <head>
+    <title>Pizza Storage App</title>
+    <script src="https://code.angularjs.org/1.6.2/angular.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-controller="MainController as mc">
+    
+    <h1>Pizza</h1>
+    <h3>Pizza's to be prepared</h3>
+    </br>
+    </br>
+    <button ng-click="mc.showEdit()">Edit</button>
+    <button ng-click="mc.hideEdit()">Finished Editting</button>
+    <ul ng-if="mc.toppings != null">
+      <li ng-repeat="topping in mc.toppings">
+        <!-- puts the toppings onto the page -->
+        {{topping.crust}}, {{topping.starting}}, {{topping.veggie}}, {{topping.moreMeat}}
+        
+        <!--allows for edits (the edit buttons) -->
+        <div ng-show="mc.editForm">
+          <button ng-click="mc.editTop1($index)">Edit this order</button>
+          <button ng-click="mc.deleteOrder($index)">Delete this order</button>
+        </div>
+        
+      </li>
+    </ul>
+    <!--sets up the editing part -->
+    <div ng-show="mc.editForm">
+        Edit crust: <select ng-model = "mc.editTopping4"
+          ng-options = "unit.unit_name for unit in mc.crust"></select>
+          </br>
+        Edit topping 1: <select ng-model = "mc.editTopping1"
+          ng-options = "unit.unit_name for unit in mc.startingToppings"></select>
+          </br>
+        Edit topping 2: <select ng-model = "mc.editTopping2"
+          ng-options = "unit.unit_name for unit in mc.veggies"></select>
+          </br>
+        Edit topping 3: <select ng-model = "mc.editTopping3"
+          ng-options = "unit.unit_name for unit in mc.extraMeat"></select>
+          </br>
+        
+          
+          <hr>
+    </div>
+    <!--Has the options -->
+    Crust: <select ng-model ="mc.topping4"
+    ng-options="unit.unit_name for unit in mc.crust"></select>
+    </br>
+    Starting Toppings: <select ng-model="mc.topping1"
+    ng-options="unit.unit_name for unit in mc.startingToppings"></select>
+    </br>
+    Veggies: <select ng-model="mc.topping2" 
+    ng-options="unit.unit_name for unit in mc.veggies">
+    </select>
+    </br>
+    Extra Meat: <select ng-model="mc.topping3" 
+    ng-options="unit.unit_name for unit in mc.extraMeat">
+    </select>
+    </br>
+    <!-- the button to add the pizza in-->
+    <button ng-click="mc.update(mc.topping4.unit_name, mc.topping1.unit_name, mc.topping2.unit_name,
+                      mc.topping3.unit_name)">Add</button>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
